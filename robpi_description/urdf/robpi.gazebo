@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<robot>
+
+<!-- added publishWheelJointState and publishWheelTF as true per a website  which log said were missing-->
+<!-- added wheelTorque to replace torque because log is complaining also changed to 5 from 20-->
+  <gazebo>
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <legacyMode>false</legacyMode>
+      <alwaysOn>true</alwaysOn>
+      <updateRate>20</updateRate>
+      <leftJoint>base_to_left_wheel</leftJoint>
+      <rightJoint>base_to_right_wheel</rightJoint>
+      <wheelSeparation>0.12005</wheelSeparation>
+      <wheelDiameter>0.08225</wheelDiameter>
+      <torque>20</torque>
+      <wheelTorque>5</wheelTorque>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <publishWheelTF>true</publishWheelTF>
+      <publishWheelJointState>true</publishWheelJointState>
+      <wheelAcceleration>0.2</wheelAcceleration>
+      <publishTf>true</publishTf>
+
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="base_link">
+      <material>Gazebo/Black</material>
+    </gazebo>
+
+</robot>

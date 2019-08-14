@@ -1,0 +1,48 @@
+<robot name="robpi" xmlns:xacro="http://www.ros.org/wiki/xacro"
+ 	xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+    	xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+    	xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
+
+<xacro:macro name="cylinder_inertial" params="m r h">
+  <inertial>
+	 <mass value="${m}" />
+	<inertia  ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0"
+	iyy="${m*(3*r*r+h*h)/12}" iyz = "0"
+	izz="${m*r*r/2}" /> 
+  </inertial>
+</xacro:macro>
+
+<xacro:macro name="box_inertial" params="m w h d x">
+  <inertial>
+	 <mass value="${m}" />
+	<inertia  ixx="${m*(h*h + d *d)/12}" 
+	ixy = "0" ixz = "0"
+	iyy="${m*(w*w+d*d)/12}" 
+	iyz = "0"
+	izz="${m*(h*h+w*w)/12}" 
+	/> 
+
+	<origin xyz="${x} 0 0"/>
+  </inertial>
+</xacro:macro>
+
+<macro name="sphere_inertial" params="m r">
+  <inertial>
+	 <mass value="${m}" />
+    <inertia  ixx="${2*m*r*r/5}" ixy = "0" ixz = "0"
+      iyy="${2*m*r*r/5}" iyz = "0"
+      izz="${2*m*r*r/5}"
+    />
+  </inertial>
+</macro>
+
+<xacro:macro name="default_inertial" params="mass">
+  <inertial>
+               <mass value="${mass}" />
+               <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+                        iyy="1.0" iyz="0.0"
+                        izz="1.0" />
+  </inertial>
+</xacro:macro>
+
+</robot>

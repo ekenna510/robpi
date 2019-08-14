@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<launch>
+
+
+<!-- https://github.com/kth-ros-pkg/ridgeback/blob/master/ridgeback_navigation/launch/amcl_demo.launch -->
+
+  <param name="use_sim_time" value="false" />
+
+  <!-- Run the map server with the desired map -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find robpi_nav)/config/robpi_map_server.yaml"/>
+
+  <!--- Run AMCL -->
+ <include file="$(find robpi_nav)/launch/include/amcl.launch" />
+
+  <!--- Run Move Base -->
+ <include file="$(find robpi_nav)/launch/include/move_base.launch" />
+
+  <!-- disbled until tf is right -->
+
+
+
+
+
+	<arg name="prefix" />
+	<arg name="gui" default="False" />
+        <!-- based on model passed in you may need to change base_frame in config/robot folder-->
+	<param name="robot_description" textfile="$(find robpi_description)/urdf/robpi.urdf" />
+	<param name="use_gui" value="$(arg gui)"/>
+	<!--<node name="joint_state_publisher2" pkg="robpi" type="state_publisher" ></node>-->
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find robpi_description)/rviz/robpi.rviz" />
+</launch>
+
